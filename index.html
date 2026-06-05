@@ -697,7 +697,256 @@
         .cta-phone-big:hover {
             transform: scale(1.05);
         }
+/* Tanks & Pools Section Styles */
+.tanks-pools {
+    padding: 6rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom, #f8fafc, #ffffff);
+}
 
+.tanks-pools .section-header {
+    margin-bottom: 4rem;
+}
+
+.tanks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.tank-card {
+    background: white;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.tank-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+.tank-card.featured {
+    border: 3px solid var(--accent);
+    transform: scale(1.05);
+}
+
+.tank-card.featured:hover {
+    transform: translateY(-15px) scale(1.05);
+}
+
+.featured-label {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: var(--dark);
+    padding: 0.5rem 2rem;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    z-index: 10;
+    box-shadow: 0 5px 20px rgba(251,191,36,0.4);
+}
+
+.tank-image {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+}
+
+.tank-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+.tank-card:hover .tank-image img {
+    transform: scale(1.1);
+}
+
+.tank-badge {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 5px 15px rgba(0,210,170,0.3);
+}
+
+.tank-content {
+    padding: 2.5rem;
+}
+
+.tank-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    margin: -60px auto 1.5rem;
+    position: relative;
+    z-index: 5;
+    box-shadow: 0 10px 30px rgba(0,210,170,0.4);
+    border: 5px solid white;
+}
+
+.tank-content h3 {
+    font-size: 1.8rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 800;
+    text-align: center;
+}
+
+.tank-content > p {
+    color: #64748b;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.tank-features {
+    list-style: none;
+    margin-bottom: 2rem;
+}
+
+.tank-features li {
+    padding: 0.8rem 0;
+    color: #475569;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    border-bottom: 1px dashed #e2e8f0;
+}
+
+.tank-features li:last-child {
+    border-bottom: none;
+}
+
+.tank-features li i {
+    color: var(--primary);
+    font-size: 1.2rem;
+    width: 25px;
+}
+
+.tank-price {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f0fdfa, #ecfdf5);
+    border-radius: 15px;
+}
+
+.price-label {
+    display: block;
+    color: #64748b;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.price-value {
+    display: block;
+    color: var(--primary);
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+.tank-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    background: var(--gradient);
+    color: white;
+    padding: 1.2rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: all 0.3s;
+    box-shadow: 0 10px 30px rgba(0,210,170,0.3);
+}
+
+.tank-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(0,210,170,0.4);
+}
+
+/* Additional Info */
+.tanks-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.info-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.info-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+}
+
+.info-card i {
+    font-size: 3rem;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    display: block;
+}
+
+.info-card h4 {
+    font-size: 1.4rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 800;
+}
+
+.info-card p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .tanks-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tank-card.featured {
+        transform: scale(1);
+        order: -1;
+    }
+    
+    .tank-card.featured:hover {
+        transform: translateY(-15px);
+    }
+}
         /* Footer */
         .footer {
             background: var(--dark);
@@ -964,6 +1213,139 @@
                 </div>
             </div>
 
+
+
+            <!-- Water Tanks & Pools Section -->
+<section class="tanks-pools" id="tanks-pools">
+    <div class="section-header">
+        <h2>خدمات الخزانات والمسابح</h2>
+        <p>حلول متكاملة لصيانة وتنظيف الخزانات والمسابح بأعلى معايير الجودة</p>
+    </div>
+
+    <div class="tanks-grid">
+        <!-- Tank Cleaning -->
+        <div class="tank-card">
+            <div class="tank-image">
+                <img src="https://images.unsplash.com/photo-1585704032915-c3400ca199e7?w=800" alt="غسيل الخزانات">
+                <div class="tank-badge">
+                    <i class="fas fa-shield-alt"></i>
+                    معتمد من الصحة
+                </div>
+            </div>
+            <div class="tank-content">
+                <div class="tank-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>غسيل وتنظيف الخزانات</h3>
+                <p>نقدم خدمة غسيل وتعقيم الخزانات بأحدث المعدات والمواد الآمنة المعتمدة من وزارة الصحة</p>
+                <ul class="tank-features">
+                    <li><i class="fas fa-check"></i> تنظيف شامل من الداخل والخارج</li>
+                    <li><i class="fas fa-check"></i> تعقيم بالكلور والمواد الآمنة</li>
+                    <li><i class="fas fa-check"></i> إزالة الرواسب والطحالب</li>
+                    <li><i class="fas fa-check"></i> فحص التسربات والشروخ</li>
+                    <li><i class="fas fa-check"></i> شهادة تعقيم معتمدة</li>
+                </ul>
+                <div class="tank-price">
+                    <span class="price-label">يبدأ من</span>
+                    <span class="price-value">300 ريال</span>
+                </div>
+                <a href="https://wa.me/966548177649" class="tank-btn">
+                    <i class="fab fa-whatsapp"></i> احجز الخدمة
+                </a>
+            </div>
+        </div>
+
+        <!-- Tank Insulation -->
+        <div class="tank-card featured">
+            <div class="featured-label">
+                <i class="fas fa-star"></i> الأكثر طلباً
+            </div>
+            <div class="tank-image">
+                <img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800" alt="عزل الخزانات">
+            </div>
+            <div class="tank-content">
+                <div class="tank-icon">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <h3>عزل الخزانات</h3>
+                <p>عزل حراري ومائي للخزانات بأفضل مواد العزل العالمية لضمان حماية كاملة ومياه نقية</p>
+                <ul class="tank-features">
+                    <li><i class="fas fa-check"></i> عزل مائي بالايبيكسي</li>
+                    <li><i class="fas fa-check"></i> عزل حراري للبلاستيك</li>
+                    <li><i class="fas fa-check"></i> مواد عالية الجودة</li>
+                    <li><i class="fas fa-check"></i> ضمان حتى 5 سنوات</li>
+                    <li><i class="fas fa-check"></i> صيانة دورية مجانية</li>
+                </ul>
+                <div class="tank-price">
+                    <span class="price-label">يبدأ من</span>
+                    <span class="price-value">500 ريال</span>
+                </div>
+                <a href="https://wa.me/966548177649" class="tank-btn">
+                    <i class="fab fa-whatsapp"></i> احجز الخدمة
+                </a>
+            </div>
+        </div>
+
+        <!-- Pool Cleaning -->
+        <div class="tank-card">
+            <div class="tank-image">
+                <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800" alt="تنظيف المسابح">
+                <div class="tank-badge">
+                    <i class="fas fa-clock"></i>
+                    خدمة يومية
+                </div>
+            </div>
+            <div class="tank-content">
+                <div class="tank-icon">
+                    <i class="fas fa-swimming-pool"></i>
+                </div>
+                <h3>تنظيف وصيانة المسابح</h3>
+                <p>خدمة شاملة لتنظيف وتعقيم المسابح مع صيانة المضخات والفلاتر لضمان مياه نظيفة وآمنة</p>
+                <ul class="tank-features">
+                    <li><i class="fas fa-check"></i> تنظيف قاع وجدران المسبح</li>
+                    <li><i class="fas fa-check"></i> تعقيم وضبط نسبة الكلور</li>
+                    <li><i class="fas fa-check"></i> صيانة المضخات والفلاتر</li>
+                    <li><i class="fas fa-check"></i> معالجة الطحالب والعكارة</li>
+                    <li><i class="fas fa-check"></i> عقود صيانة شهرية</li>
+                </ul>
+                <div class="tank-price">
+                    <span class="price-label">يبدأ من</span>
+                    <span class="price-value">400 ريال</span>
+                </div>
+                <a href="https://wa.me/966548177649" class="tank-btn">
+                    <i class="fab fa-whatsapp"></i> احجز الخدمة
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Info -->
+    <div class="tanks-info">
+        <div class="info-card">
+            <i class="fas fa-certificate"></i>
+            <h4>مواد معتمدة</h4>
+            <p>نستخدم فقط المواد المعتمدة من وزارة الصحة والبلدية</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-user-shield"></i>
+            <h4>فريق مدرب</h4>
+            <p>فنيون متخصصون ومدربون على أعلى مستوى</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-tools"></i>
+            <h4>معدات حديثة</h4>
+            <p>أحدث معدات التنظيف والعزل العالمية</p>
+        </div>
+        <div class="info-card">
+            <i class="fas fa-award"></i>
+            <h4>ضمان الخدمة</h4>
+            <p>ضمان شامل على جميع خدمات العزل والصيانة</p>
+        </div>
+    </div>
+</section>
+
+
+            
             <!-- Service 3 -->
             <div class="service-card">
                 <span class="service-badge">جديد</span>
