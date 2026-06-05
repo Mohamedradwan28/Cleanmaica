@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كلين مكة | خدمات تنظيف احترافية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #00d2aa;
+            --secondary: #00a885;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #fbbf24;
+            --gradient: linear-gradient(135deg, #00d2aa 0%, #00a885 100%);
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--light);
+            overflow-x: hidden;
+        }
+
+        /* Preloader */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 4px solid var(--primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .header.scrolled {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .header.scrolled .logo {
+            color: var(--dark);
+        }
+
+        .logo i {
+            color: var(--accent);
+            font-size: 2.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .header.scrolled .nav-menu a {
+            color: var(--dark);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .header-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .header-phone:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,210,170,0.4);
+        }
+
+        /* Hero Section with Slider */
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-slider {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15,23,42,0.9) 0%, rgba(0,168,133,0.7) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 900px;
+            padding: 0 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,210,170,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,210,170,0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--dark);
+            box-shadow: 0 10px 30px rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(255,255,255,0.4);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--accent);
+            width: 40px;
+            border-radius: 10px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: white;
+            padding: 4rem 2rem;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3rem;
+            color: var(--primary);
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #64748b;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 3rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 900;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .service-image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            z-index: 2;
+        }
+
+        .service-content {
+            padding: 2rem;
+            position: relative;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            top: -50px;
+            margin-top: -50px;
+            box-shadow: 0 10px 30px rgba(0,210,170,0.3);
+        }
+
+        .service-content h3 {
+            font-size: 1.6rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .service-content p {
+            color: #64748b;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.5rem 0;
+            color: #475569;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 600;
+        }
+
+        .service-features li i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .service-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1.5rem;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--dark);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,210,170,0.1) 0%, transparent 70%);
+        }
+
+        .gallery .section-header h2 {
+            color: white;
+        }
+
+        .gallery .section-header p {
+            color: #94a3b8;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 350px;
+            cursor: pointer;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 2rem;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 4rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            font-size: 8rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            right: 30px;
+            font-family: serif;
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .stars {
+            color: var(--accent);
+        }
+
+        .testimonial-text {
+            color: #64748b;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: var(--gradient);
+            padding: 5rem 2rem;
+            margin: 4rem auto;
+            max-width: 1200px;
+            border-radius: 40px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,210,170,0.3);
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+        }
+
+        .cta h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+            position: relative;
+        }
+
+        .cta p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            position: relative;
+        }
+
+        .cta-phone-big {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            color: var(--dark);
+            padding: 1.5rem 4rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .cta-phone-big:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-icons a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        /* Floating Buttons */
+        .floating-buttons {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            height: 80px;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.2);
+            z-index: 999;
+            background: white;
+        }
+
+        .float-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 800;
+            transition: all 0.3s;
+        }
+
+        .float-btn.whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .float-btn.call {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+        }
+
+        .float-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .float-btn i {
+            font-size: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta h2 {
+                font-size: 2rem;
+            }
+
+            .cta-phone-big {
+                font-size: 1.5rem;
+                padding: 1.2rem 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+                <i class="fas fa-sparkles"></i>
+                <span>كلين مكة</span>
+            </a>
+            <ul class="nav-menu">
+                <li><a href="#home">الرئيسية</a></li>
+                <li><a href="#services">خدماتنا</a></li>
+                <li><a href="#gallery">معرض الصور</a></li>
+                <li><a href="#testimonials">آراء العملاء</a></li>
+            </ul>
+            <a href="tel:0548177649" class="header-phone">
+                <i class="fas fa-phone-alt"></i>
+                <span>0548177649</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-slider">
+            <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1581578731117-104f2a41272c?w=1920')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1527515545081-5db817172677?w=1920')"></div>
+            <div class="hero-slide" style="background-image: url('https://images.unsplash.com/photo-1584820927498-cfe58162f354?w=1920')"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">🏆 الأفضل في مكة</div>
+            <h1>نظافة احترافية لمنزل مثالي</h1>
+            <p>أحدث التقنيات وأفضل الفرق المتخصصة لخدمتك على مدار الساعة</p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/966548177649" class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i>
+                    تواصل عبر واتساب
+                </a>
+                <a href="tel:0548177649" class="btn btn-secondary">
+                    <i class="fas fa-phone-alt"></i>
+                    اتصل الآن
+                </a>
+            </div>
+        </div>
+        <div class="slider-dots">
+            <span class="dot active" onclick="changeSlide(0)"></span>
+            <span class="dot" onclick="changeSlide(1)"></span>
+            <span class="dot" onclick="changeSlide(2)"></span>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <h3>+5000</h3>
+                <p>عميل سعيد</p>
+            </div>
+            <div class="stat-item">
+                <h3>+15</h3>
+                <p>سنة خبرة</p>
+            </div>
+            <div class="stat-item">
+                <h3>+50</h3>
+                <p>موظف محترف</p>
+            </div>
+            <div class="stat-item">
+                <h3>100%</h3>
+                <p>ضمان الجودة</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-header">
+            <h2>خدماتنا المتميزة</h2>
+            <p>نقدم حلول تنظيف شاملة بأعلى معايير الجودة العالمية</p>
+        </div>
+        <div class="services-grid">
+            <!-- Service 1 -->
+            <div class="service-card">
+                <span class="service-badge">الأكثر طلباً</span>
+                <img src="https://al-ealamia.com/wp-content/uploads/2021/12/images-97.jpg" alt="تنظيف الشقق" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3>تنظيف الشقق</h3>
+                    <p>تنظيف شامل واحترافي للشقق بأحدث المعدات والمواد الآمنة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> تنظيف جميع الغرف</li>
+                        <li><i class="fas fa-check-circle"></i> جلي وتلميع الأرضيات</li>
+                        <li><i class="fas fa-check-circle"></i> تنظيف المطابخ والحمامات</li>
+                        <li><i class="fas fa-check-circle"></i> تعقيم شامل</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2 -->
+            <div class="service-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAq17ogGfooOAL0z4QMnZbeoyFNXQx843GHKo5EMo3FjlPllMFIt0A4MLR&s=10" alt="تنظيف الفلل" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>تنظيف الفلل</h3>
+                    <p>خدمة متخصصة لتنظيف الفلل والقصور بأعلى معايير الجودة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> تنظيف جميع الأدوار</li>
+                        <li><i class="fas fa-check-circle"></i> المسابح والحدائق</li>
+                        <li><i class="fas fa-check-circle"></i> الواجهات الخارجية</li>
+                        <li><i class="fas fa-check-circle"></i> فريق متخصص</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3 -->
+            <div class="service-card">
+                <span class="service-badge">جديد</span>
+                <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800" alt="تنظيف الكنب" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-couch"></i>
+                    </div>
+                    <h3>تنظيف الكنب بالبخار</h3>
+                    <p>تنظيف عميق بالبخار لإزالة البقع والتعقيم الكامل</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> إزالة البقع الصعبة</li>
+                        <li><i class="fas fa-check-circle"></i> بخار ساخن للتعقيم</li>
+                        <li><i class="fas fa-check-circle"></i> إزالة الروائح</li>
+                        <li><i class="fas fa-check-circle"></i> حماية الأقمشة</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 4 -->
+            <div class="service-card">
+                <img src="https://images.unsplash.com/photo-1558317374-067fb5f30001?w=800" alt="تنظيف السجاد" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-rug"></i>
+                    </div>
+                    <h3>تنظيف السجاد</h3>
+                    <p>تنظيف احترافي للسجاد والموكيت بأحدث الأجهزة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> تنظيف عميق</li>
+                        <li><i class="fas fa-check-circle"></i> إزالة البقع والعفن</li>
+                        <li><i class="fas fa-check-circle"></i> تجفيف سريع</li>
+                        <li><i class="fas fa-check-circle"></i> مواد آمنة</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 5 -->
+            <div class="service-card">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjM0Z9m1Lcw55ylowx3RlwoGYTdKVOocsCYmpXa5NR2prlJKeMEX_xamHM&s=10" alt="مكافحة الحشرات" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>مكافحة الحشرات</h3>
+                    <p>القضاء على جميع أنواع الحشرات بمواد آمنة ومضمونة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> صراصير ونمل</li>
+                        <li><i class="fas fa-check-circle"></i> بق الفراش</li>
+                        <li><i class="fas fa-check-circle"></i> مواد آمنة</li>
+                        <li><i class="fas fa-check-circle"></i> ضمان طويل</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 6 -->
+            <div class="service-card">
+                <img src="https://d2pi0n2fm836iz.cloudfront.net/309427/01092025203440678032e048c03.jpg" alt="تنظيف الخزانات" class="service-image">
+                <div class="service-content">
+                    <div class="service-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <h3>تنظيف الخزانات</h3>
+                    <p>غسل وتعقيم الخزانات لضمان مياه نظيفة وآمنة</p>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check-circle"></i> تنظيف شامل</li>
+                        <li><i class="fas fa-check-circle"></i> تعقيم بالكلور</li>
+                        <li><i class="fas fa-check-circle"></i> كشف التسربات</li>
+                        <li><i class="fas fa-check-circle"></i> صيانة دورية</li>
+                    </ul>
+                    <div class="service-price">
+                        <div class="price">يبدأ من <span>ريال</span></div>
+                        <a href="https://wa.me/966548177649" class="btn btn-primary" style="padding: 0.8rem 1.5rem; font-size: 1rem;">احجز الآن</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+       
+    <!-- Testimonials -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-header">
+            <h2>آراء عملائنا</h2>
+            <p>نفخر بثقة عملائنا ورضاهم عن خدماتنا</p>
+        </div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=11" alt="عميل" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>محمد أحمد</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    خدمة ممتازة وفريق محترف جداً. نظفوا الشقة بشكل رائع والنتيجة كانت فوق توقعاتي. أنصح بالتعامل معهم بشدة.
+                </p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=5" alt="عميل" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>فاطمة علي</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    استخدمت خدمة تنظيف الكنب بالبخار وكانت النتيجة مذهلة! أزالوا جميع البقع والروائح. سعر ممتاز وجودة عالية.
+                </p>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <img src="https://i.pravatar.cc/150?img=3" alt="عميل" class="testimonial-avatar">
+                    <div class="testimonial-info">
+                        <h4>خالد عمر</h4>
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="testimonial-text">
+                    تعاملت معهم في تنظيف الفيلا ومكافحة الحشرات. فريق منظم ومحترف والالتزام بالمواعيد ممتاز. شكراً كلين مكة.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>استعد نظافة منزلك الآن!</h2>
+        <p>لا تتردد في التواصل معنا للحصول على خدمة مميزة وبأسعار منافسة</p>
+        <a href="tel:0548177649" class="cta-phone-big">
+            <i class="fas fa-phone-alt"></i>
+            0548177649
+        </a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <i class="fas fa-sparkles"></i> كلين مكة
+        </div>
+        <p>نخدمك بكل احترافية وأمانة في مكة المكرمة وما حولها</p>
+        <div class="footer-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#services">خدماتنا</a>
+            <a href="#gallery">معرض الصور</a>
+            <a href="#testimonials">آراء العملاء</a>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="https://wa.me/966548177649"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p style="margin-top: 2rem; opacity: 0.7;">&copy; 2026 كلين مكة - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- Floating Buttons -->
+    <div class="floating-buttons">
+        <a href="https://wa.me/966548177649" class="float-btn whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>واتساب</span>
+        </a>
+        <a href="tel:0548177649" class="float-btn call">
+            <i class="fas fa-phone-alt"></i>
+            <span>اتصل الآن</span>
+        </a>
+    </div>
+
+    <script>
+        // Preloader
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.querySelector('.preloader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hero Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function changeSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            currentSlide = index;
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            changeSlide(currentSlide);
+        }, 5000);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .testimonial-card, .gallery-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Counter animation
+        const counters = document.querySelectorAll('.stat-item h3');
+        const speed = 200;
+
+        const animateCounters = () => {
+            counters.forEach(counter => {
+                const target = +counter.innerText.replace(/\D/g, '');
+                const count = +counter.innerText.replace(/\D/g, '');
+                const inc = target / speed;
+
+                if (count < target) {
+                    const suffix = counter.innerText.replace(/[0-9]/g, '');
+                    counter.innerText = Math.ceil(count + inc) + suffix;
+                    setTimeout(animateCounters, 20);
+                }
+            });
+        };
+
+        // Trigger counters when stats section is visible
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statsObserver.observe(document.querySelector('.stats'));
+    </script>
+
+</body>
+</html>
